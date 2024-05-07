@@ -7,9 +7,9 @@ Program -> ， Program Declaration
 Program -> ，
 
 I1:
-S' -> Program ， 
-Program -> Program ， Declaration 
 Program -> Program ， Function 
+Program -> Program ， Declaration 
+S' -> Program ， 
 Function -> ， Type identifier ( Arguments ) Block 
 Function -> ， Type identifier ( ) Block 
 Declaration -> ， Type Declaration_entity ; 
@@ -32,10 +32,10 @@ I4:
 Program -> Program Function ，
 
 I5:
-Function -> Type ， identifier ( ) Block 
 Declaration -> Type ， Declaration_entity ; 
 Function -> Type ， identifier ( Arguments ) Block 
 Type -> Type ， * 
+Function -> Type ， identifier ( ) Block 
 Declaration_entity -> ， Declaration_entity , Identifier_array 
 Declaration_entity -> ， Declaration_entity , Identifier_array = Assignment_expression 
 Declaration_entity -> ， Identifier_array 
@@ -62,9 +62,9 @@ I11:
 Basic_type -> void ，
 
 I12:
-Declaration -> Type Declaration_entity ， ; 
+Declaration_entity -> Declaration_entity ， , Identifier_array = Assignment_expression 
 Declaration_entity -> Declaration_entity ， , Identifier_array 
-Declaration_entity -> Declaration_entity ， , Identifier_array = Assignment_expression
+Declaration -> Type Declaration_entity ， ;
 
 I13:
 Declaration_entity -> Identifier_array ， 
@@ -75,9 +75,9 @@ I14:
 Type -> Type * ，
 
 I15:
-Function -> Type identifier ， ( Arguments ) Block 
 Function -> Type identifier ， ( ) Block 
-Identifier_array -> identifier ，
+Identifier_array -> identifier ， 
+Function -> Type identifier ， ( Arguments ) Block
 
 I16:
 Declaration_entity -> Declaration_entity , ， Identifier_array 
@@ -164,9 +164,9 @@ I22:
 Identifier_array -> identifier ，
 
 I23:
-Arithmetic_expression -> Arithmetic_expression ， + Term_expression 
 Arithmetic_expression -> Arithmetic_expression ， - Term_expression 
-Relation_expression -> Arithmetic_expression ，
+Relation_expression -> Arithmetic_expression ， 
+Arithmetic_expression -> Arithmetic_expression ， + Term_expression
 
 I24:
 Declaration_entity -> Identifier_array = Assignment_expression ，
@@ -177,15 +177,15 @@ Evaluation_expression -> Bool_expression ，
 
 I26:
 Equality_expression -> Equality_expression ， == Relation_expression 
-Equality_expression -> Equality_expression ， != Relation_expression 
-Join_expression -> Equality_expression ，
+Join_expression -> Equality_expression ， 
+Equality_expression -> Equality_expression ， != Relation_expression
 
 I27:
-Assignment_expression -> Evaluation_expression ， = Assignment_expression 
 Assignment_expression -> Evaluation_expression ， %= Assignment_expression 
 Assignment_expression -> Evaluation_expression ， -= Assignment_expression 
-Assignment_expression -> Evaluation_expression ， += Assignment_expression 
 Assignment_expression -> Evaluation_expression ， *= Assignment_expression 
+Assignment_expression -> Evaluation_expression ， += Assignment_expression 
+Assignment_expression -> Evaluation_expression ， = Assignment_expression 
 Assignment_expression -> Evaluation_expression ， 
 Assignment_expression -> Evaluation_expression ， /= Assignment_expression
 
@@ -196,25 +196,25 @@ I29:
 Factor_expression -> Function_expression ，
 
 I30:
-Bool_expression -> Join_expression ， 
-Join_expression -> Join_expression ， && Equality_expression
+Join_expression -> Join_expression ， && Equality_expression 
+Bool_expression -> Join_expression ，
 
 I31:
 Location_expression -> Location_expression ， [ Expression ] 
 Factor_expression -> Location_expression ，
 
 I32:
-Relation_expression -> Relation_expression ， < Arithmetic_expression 
 Relation_expression -> Relation_expression ， > Arithmetic_expression 
 Relation_expression -> Relation_expression ， >= Arithmetic_expression 
+Equality_expression -> Relation_expression ， 
 Relation_expression -> Relation_expression ， <= Arithmetic_expression 
-Equality_expression -> Relation_expression ，
+Relation_expression -> Relation_expression ， < Arithmetic_expression
 
 I33:
-Term_expression -> Term_expression ， * Unary_expression 
 Arithmetic_expression -> Term_expression ， 
+Term_expression -> Term_expression ， % Unary_expression 
 Term_expression -> Term_expression ， / Unary_expression 
-Term_expression -> Term_expression ， % Unary_expression
+Term_expression -> Term_expression ， * Unary_expression
 
 I34:
 Term_expression -> Unary_expression ，
@@ -391,9 +391,9 @@ I43:
 Factor_expression -> float_value ，
 
 I44:
-Function_expression -> identifier ， ( Separation_expression ) 
+Function_expression -> identifier ， ( ) 
 Location_expression -> identifier ， 
-Function_expression -> identifier ， ( )
+Function_expression -> identifier ， ( Separation_expression )
 
 I45:
 Factor_expression -> int_value ，
@@ -411,8 +411,8 @@ I49:
 Arguments -> Argument ，
 
 I50:
-Arguments -> Arguments ， , Argument 
-Function -> Type identifier ( Arguments ， ) Block
+Function -> Type identifier ( Arguments ， ) Block 
+Arguments -> Arguments ， , Argument
 
 I51:
 Type -> Type ， * 
@@ -1221,8 +1221,8 @@ I81:
 Unary_expression -> - Unary_expression ，
 
 I82:
-Function_expression -> identifier ( ， Separation_expression ) 
 Function_expression -> identifier ( ， ) 
+Function_expression -> identifier ( ， Separation_expression ) 
 Separation_expression -> ， Assignment_expression , Separation_expression 
 Separation_expression -> ， Assignment_expression 
 Assignment_expression -> ， Evaluation_expression = Assignment_expression 
@@ -1307,34 +1307,34 @@ I89:
 Declaration_entity -> Declaration_entity , Identifier_array = Assignment_expression ，
 
 I90:
-Term_expression -> Term_expression ， * Unary_expression 
 Term_expression -> Term_expression ， % Unary_expression 
 Arithmetic_expression -> Arithmetic_expression + Term_expression ， 
-Term_expression -> Term_expression ， / Unary_expression
+Term_expression -> Term_expression ， / Unary_expression 
+Term_expression -> Term_expression ， * Unary_expression
 
 I91:
-Term_expression -> Term_expression ， * Unary_expression 
-Arithmetic_expression -> Arithmetic_expression - Term_expression ， 
 Term_expression -> Term_expression ， / Unary_expression 
-Term_expression -> Term_expression ， % Unary_expression
+Term_expression -> Term_expression ， % Unary_expression 
+Arithmetic_expression -> Arithmetic_expression - Term_expression ， 
+Term_expression -> Term_expression ， * Unary_expression
 
 I92:
-Bool_expression -> Bool_expression || Join_expression ， 
-Join_expression -> Join_expression ， && Equality_expression
+Join_expression -> Join_expression ， && Equality_expression 
+Bool_expression -> Bool_expression || Join_expression ，
 
 I93:
-Relation_expression -> Relation_expression ， < Arithmetic_expression 
-Relation_expression -> Relation_expression ， > Arithmetic_expression 
+Equality_expression -> Equality_expression != Relation_expression ， 
 Relation_expression -> Relation_expression ， >= Arithmetic_expression 
+Relation_expression -> Relation_expression ， > Arithmetic_expression 
 Relation_expression -> Relation_expression ， <= Arithmetic_expression 
-Equality_expression -> Equality_expression != Relation_expression ，
+Relation_expression -> Relation_expression ， < Arithmetic_expression
 
 I94:
-Relation_expression -> Relation_expression ， < Arithmetic_expression 
 Relation_expression -> Relation_expression ， > Arithmetic_expression 
 Relation_expression -> Relation_expression ， >= Arithmetic_expression 
+Equality_expression -> Equality_expression == Relation_expression ， 
 Relation_expression -> Relation_expression ， <= Arithmetic_expression 
-Equality_expression -> Equality_expression == Relation_expression ，
+Relation_expression -> Relation_expression ， < Arithmetic_expression
 
 I95:
 Assignment_expression -> Evaluation_expression %= Assignment_expression ，
@@ -1355,16 +1355,16 @@ I100:
 Assignment_expression -> Evaluation_expression = Assignment_expression ，
 
 I101:
+Join_expression -> Join_expression && Equality_expression ， 
 Equality_expression -> Equality_expression ， == Relation_expression 
-Equality_expression -> Equality_expression ， != Relation_expression 
-Join_expression -> Join_expression && Equality_expression ，
+Equality_expression -> Equality_expression ， != Relation_expression
 
 I102:
 Location_expression -> Location_expression [ Expression ， ]
 
 I103:
-Relation_expression -> Relation_expression < Arithmetic_expression ， 
 Arithmetic_expression -> Arithmetic_expression ， - Term_expression 
+Relation_expression -> Relation_expression < Arithmetic_expression ， 
 Arithmetic_expression -> Arithmetic_expression ， + Term_expression
 
 I104:
@@ -1373,13 +1373,13 @@ Relation_expression -> Relation_expression <= Arithmetic_expression ，
 Arithmetic_expression -> Arithmetic_expression ， + Term_expression
 
 I105:
-Relation_expression -> Relation_expression > Arithmetic_expression ， 
 Arithmetic_expression -> Arithmetic_expression ， - Term_expression 
-Arithmetic_expression -> Arithmetic_expression ， + Term_expression
+Arithmetic_expression -> Arithmetic_expression ， + Term_expression 
+Relation_expression -> Relation_expression > Arithmetic_expression ，
 
 I106:
-Relation_expression -> Relation_expression >= Arithmetic_expression ， 
 Arithmetic_expression -> Arithmetic_expression ， - Term_expression 
+Relation_expression -> Relation_expression >= Arithmetic_expression ， 
 Arithmetic_expression -> Arithmetic_expression ， + Term_expression
 
 I107:
@@ -1458,9 +1458,9 @@ I115:
 Arguments -> Arguments , Argument ，
 
 I116:
-Block -> { Declarations_or_statements ， } 
 Declarations_or_statements -> Declarations_or_statements ， Declaration 
 Declarations_or_statements -> Declarations_or_statements ， Statement 
+Block -> { Declarations_or_statements ， } 
 Declaration -> ， Type Declaration_entity ; 
 Statement -> ， Open_statement 
 Statement -> ， Closed_statement 
@@ -1569,8 +1569,8 @@ I125:
 Declarations_or_statements -> Declarations_or_statements Statement ，
 
 I126:
-Declaration -> Type ， Declaration_entity ; 
 Type -> Type ， * 
+Declaration -> Type ， Declaration_entity ; 
 Declaration_entity -> ， Declaration_entity , Identifier_array 
 Declaration_entity -> ， Declaration_entity , Identifier_array = Assignment_expression 
 Declaration_entity -> ， Identifier_array 
@@ -1661,22 +1661,22 @@ Function_expression -> ， identifier ( Separation_expression )
 Function_expression -> ， identifier ( )
 
 I131:
+Open_statement -> for ， ( Declaration Expression ; Expression ) Open_statement 
 Open_statement -> for ， ( Expression ; Expression ; Expression ) Open_statement 
 Closed_statement -> for ， ( Declaration Expression ; Expression ) Closed_statement 
-Closed_statement -> for ， ( Expression ; Expression ; Expression ) Closed_statement 
-Open_statement -> for ， ( Declaration Expression ; Expression ) Open_statement
+Closed_statement -> for ， ( Expression ; Expression ; Expression ) Closed_statement
 
 I132:
 Closed_statement -> goto ， identifier ;
 
 I133:
-Open_statement -> if ， ( Bool_expression ) Statement 
 Open_statement -> if ， ( Bool_expression ) Closed_statement else Open_statement 
-Closed_statement -> if ， ( Bool_expression ) Closed_statement else Closed_statement
+Closed_statement -> if ， ( Bool_expression ) Closed_statement else Closed_statement 
+Open_statement -> if ， ( Bool_expression ) Statement
 
 I134:
-Closed_statement -> return ， Expression ; 
 Closed_statement -> return ， ; 
+Closed_statement -> return ， Expression ; 
 Expression -> ， Separation_expression 
 Separation_expression -> ， Assignment_expression , Separation_expression 
 Separation_expression -> ， Assignment_expression 
@@ -1747,16 +1747,22 @@ I140:
 Closed_statement -> do Statement ， while ( Bool_expression ) ;
 
 I141:
-Closed_statement -> for ( ， Expression ; Expression ; Expression ) Closed_statement 
 Closed_statement -> for ( ， Declaration Expression ; Expression ) Closed_statement 
 Open_statement -> for ( ， Declaration Expression ; Expression ) Open_statement 
+Closed_statement -> for ( ， Expression ; Expression ; Expression ) Closed_statement 
 Open_statement -> for ( ， Expression ; Expression ; Expression ) Open_statement 
-Expression -> ， Separation_expression 
 Declaration -> ， Type Declaration_entity ; 
-Separation_expression -> ， Assignment_expression , Separation_expression 
-Separation_expression -> ， Assignment_expression 
+Expression -> ， Separation_expression 
 Type -> ， Type * 
 Type -> ， Basic_type 
+Separation_expression -> ， Assignment_expression , Separation_expression 
+Separation_expression -> ， Assignment_expression 
+Basic_type -> ， float 
+Basic_type -> ， int 
+Basic_type -> ， bool 
+Basic_type -> ， void 
+Basic_type -> ， string 
+Basic_type -> ， char 
 Assignment_expression -> ， Evaluation_expression = Assignment_expression 
 Assignment_expression -> ， Evaluation_expression += Assignment_expression 
 Assignment_expression -> ， Evaluation_expression -= Assignment_expression 
@@ -1764,12 +1770,6 @@ Assignment_expression -> ， Evaluation_expression *= Assignment_expression
 Assignment_expression -> ， Evaluation_expression /= Assignment_expression 
 Assignment_expression -> ， Evaluation_expression %= Assignment_expression 
 Assignment_expression -> ， Evaluation_expression 
-Basic_type -> ， float 
-Basic_type -> ， int 
-Basic_type -> ， bool 
-Basic_type -> ， void 
-Basic_type -> ， string 
-Basic_type -> ， char 
 Evaluation_expression -> ， Bool_expression 
 Bool_expression -> ， Bool_expression || Join_expression 
 Bool_expression -> ， Join_expression 
@@ -1814,9 +1814,9 @@ I142:
 Closed_statement -> goto identifier ， ;
 
 I143:
-Open_statement -> if ( ， Bool_expression ) Statement 
 Closed_statement -> if ( ， Bool_expression ) Closed_statement else Closed_statement 
 Open_statement -> if ( ， Bool_expression ) Closed_statement else Open_statement 
+Open_statement -> if ( ， Bool_expression ) Statement 
 Bool_expression -> ， Bool_expression || Join_expression 
 Bool_expression -> ， Join_expression 
 Join_expression -> ， Join_expression && Equality_expression 
@@ -1908,8 +1908,8 @@ I147:
 Closed_statement -> do Statement while ， ( Bool_expression ) ;
 
 I148:
-Closed_statement -> for ( Declaration ， Expression ; Expression ) Closed_statement 
 Open_statement -> for ( Declaration ， Expression ; Expression ) Open_statement 
+Closed_statement -> for ( Declaration ， Expression ; Expression ) Closed_statement 
 Expression -> ， Separation_expression 
 Separation_expression -> ， Assignment_expression , Separation_expression 
 Separation_expression -> ， Assignment_expression 
@@ -1961,25 +1961,25 @@ Function_expression -> ， identifier ( Separation_expression )
 Function_expression -> ， identifier ( )
 
 I149:
-Open_statement -> for ( Expression ， ; Expression ; Expression ) Open_statement 
-Closed_statement -> for ( Expression ， ; Expression ; Expression ) Closed_statement
+Closed_statement -> for ( Expression ， ; Expression ; Expression ) Closed_statement 
+Open_statement -> for ( Expression ， ; Expression ; Expression ) Open_statement
 
 I150:
 Closed_statement -> goto identifier ; ，
 
 I151:
-Bool_expression -> Bool_expression ， || Join_expression 
+Open_statement -> if ( Bool_expression ， ) Statement 
 Open_statement -> if ( Bool_expression ， ) Closed_statement else Open_statement 
 Closed_statement -> if ( Bool_expression ， ) Closed_statement else Closed_statement 
-Open_statement -> if ( Bool_expression ， ) Statement
+Bool_expression -> Bool_expression ， || Join_expression
 
 I152:
 Closed_statement -> return Expression ; ，
 
 I153:
-Bool_expression -> Bool_expression ， || Join_expression 
 Closed_statement -> while ( Bool_expression ， ) Closed_statement 
-Open_statement -> while ( Bool_expression ， ) Open_statement
+Open_statement -> while ( Bool_expression ， ) Open_statement 
+Bool_expression -> Bool_expression ， || Join_expression
 
 I154:
 Closed_statement -> do Statement while ( ， Bool_expression ) ; 
@@ -2027,8 +2027,8 @@ Closed_statement -> for ( Declaration Expression ， ; Expression ) Closed_statem
 Open_statement -> for ( Declaration Expression ， ; Expression ) Open_statement
 
 I156:
-Closed_statement -> for ( Expression ; ， Expression ; Expression ) Closed_statement 
 Open_statement -> for ( Expression ; ， Expression ; Expression ) Open_statement 
+Closed_statement -> for ( Expression ; ， Expression ; Expression ) Closed_statement 
 Expression -> ， Separation_expression 
 Separation_expression -> ， Assignment_expression , Separation_expression 
 Separation_expression -> ， Assignment_expression 
@@ -2081,8 +2081,10 @@ Function_expression -> ， identifier ( )
 
 I157:
 Open_statement -> if ( Bool_expression ) ， Closed_statement else Open_statement 
-Closed_statement -> if ( Bool_expression ) ， Closed_statement else Closed_statement 
 Open_statement -> if ( Bool_expression ) ， Statement 
+Closed_statement -> if ( Bool_expression ) ， Closed_statement else Closed_statement 
+Statement -> ， Open_statement 
+Statement -> ， Closed_statement 
 Closed_statement -> ， if ( Bool_expression ) Closed_statement else Closed_statement 
 Closed_statement -> ， while ( Bool_expression ) Closed_statement 
 Closed_statement -> ， for ( Expression ; Expression ; Expression ) Closed_statement 
@@ -2096,15 +2098,13 @@ Closed_statement -> ， continue ;
 Closed_statement -> ， goto identifier ; 
 Closed_statement -> ， return Expression ; 
 Closed_statement -> ， return ; 
-Statement -> ， Open_statement 
-Statement -> ， Closed_statement 
-Block -> ， { Declarations_or_statements } 
-Expression -> ， Separation_expression 
 Open_statement -> ， if ( Bool_expression ) Statement 
 Open_statement -> ， if ( Bool_expression ) Closed_statement else Open_statement 
 Open_statement -> ， while ( Bool_expression ) Open_statement 
 Open_statement -> ， for ( Expression ; Expression ; Expression ) Open_statement 
 Open_statement -> ， for ( Declaration Expression ; Expression ) Open_statement 
+Block -> ， { Declarations_or_statements } 
+Expression -> ， Separation_expression 
 Separation_expression -> ， Assignment_expression , Separation_expression 
 Separation_expression -> ， Assignment_expression 
 Assignment_expression -> ， Evaluation_expression = Assignment_expression 
@@ -2155,8 +2155,8 @@ Function_expression -> ， identifier ( Separation_expression )
 Function_expression -> ， identifier ( )
 
 I158:
-Open_statement -> while ( Bool_expression ) ， Open_statement 
 Closed_statement -> while ( Bool_expression ) ， Closed_statement 
+Open_statement -> while ( Bool_expression ) ， Open_statement 
 Closed_statement -> ， if ( Bool_expression ) Closed_statement else Closed_statement 
 Closed_statement -> ， while ( Bool_expression ) Closed_statement 
 Closed_statement -> ， for ( Expression ; Expression ; Expression ) Closed_statement 
@@ -2227,12 +2227,12 @@ Function_expression -> ， identifier ( Separation_expression )
 Function_expression -> ， identifier ( )
 
 I159:
-Bool_expression -> Bool_expression ， || Join_expression 
-Closed_statement -> do Statement while ( Bool_expression ， ) ;
+Closed_statement -> do Statement while ( Bool_expression ， ) ; 
+Bool_expression -> Bool_expression ， || Join_expression
 
 I160:
-Open_statement -> for ( Declaration Expression ; ， Expression ) Open_statement 
 Closed_statement -> for ( Declaration Expression ; ， Expression ) Closed_statement 
+Open_statement -> for ( Declaration Expression ; ， Expression ) Open_statement 
 Expression -> ， Separation_expression 
 Separation_expression -> ， Assignment_expression , Separation_expression 
 Separation_expression -> ， Assignment_expression 
@@ -2288,9 +2288,9 @@ Closed_statement -> for ( Expression ; Expression ， ; Expression ) Closed_state
 Open_statement -> for ( Expression ; Expression ， ; Expression ) Open_statement
 
 I162:
-Statement -> Closed_statement ， 
 Open_statement -> if ( Bool_expression ) Closed_statement ， else Open_statement 
-Closed_statement -> if ( Bool_expression ) Closed_statement ， else Closed_statement
+Closed_statement -> if ( Bool_expression ) Closed_statement ， else Closed_statement 
+Statement -> Closed_statement ，
 
 I163:
 Open_statement -> if ( Bool_expression ) Statement ，
@@ -2525,8 +2525,8 @@ I176:
 Open_statement -> for ( Declaration Expression ; Expression ) Open_statement ，
 
 I177:
-Closed_statement -> for ( Expression ; Expression ; Expression ) ， Closed_statement 
 Open_statement -> for ( Expression ; Expression ; Expression ) ， Open_statement 
+Closed_statement -> for ( Expression ; Expression ; Expression ) ， Closed_statement 
 Open_statement -> ， if ( Bool_expression ) Statement 
 Open_statement -> ， if ( Bool_expression ) Closed_statement else Open_statement 
 Open_statement -> ， while ( Bool_expression ) Open_statement 

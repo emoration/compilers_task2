@@ -4,7 +4,7 @@
 
 - Quick start：
   1. 安装代码中所需的库
-  2. 直接运行`task2.py`即可
+  2. 直接运行`task2.py`即可（如果打开了输出的excel文件，请关闭后再运行代码）
 - 修改代码：
   1. `my_grammar.py`中可以修改文法
   2. `task1_package.py`为词法分析器，不建议修改

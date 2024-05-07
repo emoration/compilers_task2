@@ -1,3 +1,12 @@
 # compilers_task2
 
 > f z u 编译原理实验——语法分析——林老师1班，组长：陈泽海
+
+- Quick start：
+  1. 安装代码中所需的库
+  2. 直接运行`task2.py`即可
+- 修改代码：
+  1. `my_grammar.py`中可以修改文法
+  2. `task1_package.py`为词法分析器，不建议修改
+  3. `data`目录中为输入输出文件，可以修改`1_sample.c`和`2_sample.c`这两个输入文件，如需添加新的样例文件，可以在`task2.py`中添加新的测试样例的文件名
+

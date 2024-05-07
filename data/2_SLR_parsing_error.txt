@@ -1,0 +1,23 @@
+[ERROR] Line 1, Column 23: Unexpected token `)`
+[ERROR] Line 4, Column 5: Unexpected token `(`
+[ERROR] Line 7, Column 1: Unexpected token `printf`
+[ERROR] Line 11, Column 22: Unexpected token `;`
+[ERROR] Line 12, Column 1: Unexpected token `global_float`
+[ERROR] Line 15, Column 26: Unexpected token `true`
+[ERROR] Line 16, Column 16: Unexpected token `]`
+[ERROR] Line 17, Column 10: Unexpected token `id`
+[ERROR] Line 18, Column 10: Unexpected token `char`
+[ERROR] Line 20, Column 5: Unexpected token `a`
+[ERROR] Line 22, Column 12: Unexpected token `(`
+[ERROR] Line 26, Column 20: Unexpected token `)`
+[ERROR] Line 32, Column 28: Unexpected token `;`
+[ERROR] Line 33, Column 9: Unexpected token `else`
+[ERROR] Line 37, Column 21: Unexpected token `float`
+[ERROR] Line 37, Column 47: Unexpected token `)`
+[ERROR] Line 43, Column 20: Unexpected token `;`
+[ERROR] Line 45, Column 9: Unexpected token `a`
+[ERROR] Line 46, Column 9: Unexpected token `b`
+[ERROR] Line 51, Column 37: Unexpected token `;`
+[ERROR] Line -1, Column -1: Unexpected token `$`
+
+

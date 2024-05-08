@@ -7,6 +7,7 @@ from __future__ import annotations
 # %%
 import builtins
 import importlib
+import os
 
 import my_grammar  # 导入语法文件
 
@@ -892,12 +893,17 @@ def get_token_place(_tokens: list[Token]) -> list[tuple[int, int]]:
 if __name__ == '__main__':
     for file_id in ["1", "2"]:
         # 定义文件路径
-        input_filepath = rf'./data/{file_id}_sample.c'  # 输入文件
-        output_SLR_parsing_table_filepath = rf'./data/{file_id}_SLR_parsing_table.txt'  # 输出SLR分析表文件
-        output_SLR_parsing_table_excelPath = rf'./data/{file_id}_SLR_parsing_table.xlsx'  # 输出SLR分析表表格
-        output_SLR_parsing_procedure_all_excelPath = rf'./data/{file_id}_SLR_parsing_procedure(all).xlsx'  # 输出SLR分析过程表格(全部)
-        output_SLR_parsing_procedure_symbolAndAction_excelPath = rf'./data/{file_id}_SLR_parsing_procedure(symbol action).xlsx'  # 输出SLR分析过程表格(符号和动作)
-        output_SLR_parsing_error_filepath = rf'./data/{file_id}_SLR_parsing_error.txt'  # 输出SLR分析错误文件
+        input_filepath = rf'./data/input/{file_id}_sample.c'  # 输入文件
+        output_SLR_parsing_table_filepath = rf'./data/output/{file_id}_SLR_parsing_table.txt'  # 输出SLR分析表文件
+        output_SLR_parsing_table_excelPath = rf'./data/output/{file_id}_SLR_parsing_table.xlsx'  # 输出SLR分析表表格
+        output_SLR_parsing_procedure_all_excelPath = rf'./data/output/{file_id}_SLR_parsing_procedure(all).xlsx'  # 输出SLR分析过程表格(全部)
+        output_SLR_parsing_procedure_symbolAndAction_excelPath = rf'./data/output/{file_id}_SLR_parsing_procedure(symbol action).xlsx'  # 输出SLR分析过程表格(符号和动作)
+        output_SLR_parsing_error_filepath = rf'./data/output/{file_id}_SLR_parsing_error.txt'  # 输出SLR分析错误文件
+        # 检查输入文件是否存在
+        assert os.path.exists(input_filepath), f"输入文件不存在: {input_filepath}"
+        # 如果输出目录./data/output则创建文件夹
+        if not os.path.exists('./data/output'):
+            os.makedirs('./data/output')
         # 刷新输出文件('w'模式会清空文件)
         print_redirect_builder(output_SLR_parsing_table_filepath, use_cache=False)("", end="", mode='w')
         print_redirect_builder(output_SLR_parsing_error_filepath, use_cache=False)("", end="", mode='w')
